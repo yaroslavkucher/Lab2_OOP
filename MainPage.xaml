@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Lab2OOP.MainPage"
+             Title="Лабораторна робота №2 (XML)"
+             BackgroundColor="#121212">
+
+    <Grid ColumnDefinitions="350, *" ColumnSpacing="0">
+
+        <ScrollView Grid.Column="0" BackgroundColor="#1E1E1E">
+            <VerticalStackLayout Spacing="20" Padding="20">
+
+                <Frame CornerRadius="12" 
+                       Padding="15" 
+                       HasShadow="False" 
+                       BorderColor="#333333"
+                       BackgroundColor="#252526">
+
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="1. Вибір Файлів" 
+                               FontSize="16" 
+                               FontAttributes="Bold" 
+                               TextColor="#E1E1E1"/>
+
+                        <Grid ColumnDefinitions="*, 50" ColumnSpacing="10">
+                            <Button Grid.Column="0" 
+                                    Text="📂 Завантажити" 
+                                    Clicked="OnLoadXmlClicked" 
+                                    BackgroundColor="#007ACC" 
+                                    TextColor="White"
+                                    FontAttributes="Bold"
+                                    CornerRadius="8"/>
+
+                            <Button Grid.Column="1" 
+                                    Text="🗑️" 
+                                    BackgroundColor="#C62828" 
+                                    TextColor="White"
+                                    Clicked="OnClearFileClicked" 
+                                    CornerRadius="8"/>
+                        </Grid>
+
+                        <Label x:Name="LblXmlFile" 
+                               Text="Файл: не обрано" 
+                               FontSize="12" 
+                               TextColor="#9D9D9D" 
+                               LineBreakMode="TailTruncation"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Frame CornerRadius="12" 
+                       Padding="15" 
+                       HasShadow="False" 
+                       BorderColor="#333333"
+                       BackgroundColor="#252526">
+
+                    <VerticalStackLayout Spacing="15">
+                        <Label Text="2. Параметри Пошуку" 
+                               FontSize="16" 
+                               FontAttributes="Bold" 
+                               TextColor="#E1E1E1"/>
+
+                        <VerticalStackLayout Spacing="5">
+                            <Picker x:Name="PickerStrategy" 
+                                    Title="Оберіть метод аналізу" 
+                                    TitleColor="#808080" 
+                                    TextColor="White"
+                                    BackgroundColor="#2D2D30"
+                                    Margin="0,5,0,0">
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>DOM</x:String>
+                                        <x:String>SAX</x:String>
+                                        <x:String>LINQ to XML</x:String>
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                                <Picker.SelectedIndex>0</Picker.SelectedIndex>
+                            </Picker>
+                        </VerticalStackLayout>
+
+                        <BoxView HeightRequest="1" Color="#404040" Margin="0,5"/>
+
+                        <VerticalStackLayout Spacing="12">
+                            <Picker x:Name="PickerAuthor" 
+                                    Title="Автор (всі)" 
+                                    TitleColor="#808080" 
+                                    TextColor="White"
+                                    BackgroundColor="#2D2D30"/>
+
+                            <Picker x:Name="PickerFaculty" 
+                                    Title="Факультет (всі)" 
+                                    TitleColor="#808080" 
+                                    TextColor="White"
+                                    BackgroundColor="#2D2D30"/>
+
+                            <Picker x:Name="PickerGenre" 
+                                    Title="Жанр (всі)" 
+                                    TitleColor="#808080" 
+                                    TextColor="White"
+                                    BackgroundColor="#2D2D30"/>
+                        </VerticalStackLayout>
+
+                        <BoxView HeightRequest="1" Color="#404040" Margin="0,5"/>
+
+                        <Button Text="🔍 Знайти" 
+                                Clicked="OnSearchClicked" 
+                                BackgroundColor="#388E3C" 
+                                TextColor="White" 
+                                FontAttributes="Bold"
+                                CornerRadius="8"
+                                HeightRequest="50"/>
+
+                        <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                            <Button Grid.Column="0" 
+                                    Text="HTML Export" 
+                                    Clicked="OnTransformClicked" 
+                                    BackgroundColor="#3E3E42"
+                                    TextColor="#E1E1E1"
+                                    FontSize="12"
+                                    CornerRadius="8"/>
+                            <Button Grid.Column="1" 
+                                    Text="Очистити" 
+                                    Clicked="OnClearClicked" 
+                                    BackgroundColor="#3E3E42"
+                                    TextColor="#E1E1E1"
+                                    FontSize="12"
+                                    CornerRadius="8"/>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Button Text="ℹ️ Про програму" 
+                        Clicked="OnHelpClicked" 
+                        BackgroundColor="Transparent" 
+                        TextColor="#808080"
+                        FontSize="12"
+                        HorizontalOptions="Center" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Grid Grid.Column="1" 
+      RowDefinitions="Auto, *" 
+      Padding="20" 
+      RowSpacing="10" 
+      BackgroundColor="#1E1E1E">
+
+            <Label Grid.Row="0" 
+           Text="Результати пошуку" 
+           FontSize="22" 
+           FontAttributes="Bold" 
+           TextColor="#E1E1E1"/>
+
+            <Border Grid.Row="1" 
+            StrokeThickness="0" 
+            StrokeShape="RoundRectangle 12"
+            BackgroundColor="#252526">
+                <Editor x:Name="EditorResults"
+                IsReadOnly="True"
+                Placeholder="Виконайте пошук..."
+                PlaceholderColor="#606060"
+                TextColor="#D4D4D4" 
+                BackgroundColor="Transparent"
+                FontFamily="Consolas" 
+                FontSize="14"
+                AutoSize="Disabled"
+                VerticalOptions="Fill"
+                Margin="5"/>
+            </Border>
+        </Grid>
+
+    </Grid>
+</ContentPage>

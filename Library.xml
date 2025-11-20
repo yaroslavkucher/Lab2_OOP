@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<library>
+	<book genre="Programming">
+		<title>Чистий код</title>
+		<author faculty="CS">Роберт Мартін</author>
+		<year>2010</year>
+	</book>
+	<book genre="ScienceFiction">
+		<title>Дюна</title>
+		<author faculty="History">Френк Герберт</author>
+		<year>1965</year>
+	</book>
+	<book genre="Programming" pages="900">
+		<title>Алгоритми: Побудова та аналіз</title>
+		<author faculty="CS">Томас Кормен</author>
+		<author faculty="CS">Чарльз Лейзерсон</author>
+		<year>1990</year>
+	</book>
+	<book genre="Philosophy">
+		<title>Медитації</title>
+		<author faculty="Philosophy">Марк Аврелій</author>
+		<year>180</year>
+	</book>
+
+	<book genre="Programming" pages="916">
+		<title>Code Complete</title>
+		<author faculty="CS">Стів Макконнелл</author>
+		<year>2004</year>
+	</book>
+	<book genre="Programming">
+		<title>Міфічний людино-місяць</title>
+		<author faculty="CS">Фредерік Брукс</author>
+		<year>1975</year>
+	</book>
+	<book genre="Programming">
+		<title>Патерни проєктування</title>
+		<author faculty="CS">Еріх Гамма</author>
+		<author faculty="CS">Річард Гелм</author>
+		<author faculty="CS">Ральф Джонсон</author>
+		<author faculty="CS">Джон Вліссідес</author>
+		<year>1994</year>
+	</book>
+	<book genre="Programming">
+		<title>Програміст-прагматик</title>
+		<author faculty="CS">Ендрю Гант</author>
+		<author faculty="CS">Девід Томас</author>
+		<year>1999</year>
+	</book>
+	<book genre="Programming">
+		<title>Структура та інтерпретація комп'ютерних програм</title>
+		<author faculty="CS">Гарольд Абельсон</author>
+		<author faculty="CS">Джеральд Джей Сассмен</author>
+		<year>1985</year>
+	</book>
+
+	<book genre="ScienceFiction">
+		<title>Фундація</title>
+		<author faculty="History">Айзек Азімов</author>
+		<year>1951</year>
+	</book>
+	<book genre="ScienceFiction">
+		<title>1984</title>
+		<author faculty="Literature">Джордж Орвелл</author>
+		<year>1949</year>
+	</book>
+	<book genre="ScienceFiction">
+		<title>451 градус за Фаренгейтом</title>
+		<author faculty="Literature">Рей Бредбері</author>
+		<year>1953</year>
+	</book>
+	<book genre="ScienceFiction">
+		<title>Нейромант</title>
+		<author faculty="Literature">Вільям Гібсон</author>
+		<year>1984</year>
+	</book>
+	<book genre="ScienceFiction">
+		<title>Гра Ендера</title>
+		<author faculty="Literature">Орсон Скотт Кард</author>
+		<year>1985</year>
+	</book>
+	<book genre="ScienceFiction">
+		<title>Прекрасний новий світ</title>
+		<author faculty="Literature">Олдос Гакслі</author>
+		<year>1932</year>
+	</book>
+
+	<book genre="Philosophy">
+		<title>Держава</title>
+		<author faculty="Philosophy">Платон</author>
+		<year>-375</year>
+	</book>
+	<book genre="Philosophy">
+		<title>Так казав Заратустра</title>
+		<author faculty="Philosophy">Фрідріх Ніцше</author>
+		<year>1883</year>
+	</book>
+	<book genre="Philosophy">
+		<title>Державець</title>
+		<author faculty="PoliticalScience">Нікколо Макіавеллі</author>
+		<year>1532</year>
+	</book>
+	<book genre="Philosophy">
+		<title>Мистецтво війни</title>
+		<author faculty="Strategy">Сунь-дзи</author>
+		<year>-500</year>
+	</book>
+	<book genre="Philosophy">
+		<title>Моральні листи до Луцилія</title>
+		<author faculty="Philosophy">Сенека</author>
+		<year>65</year>
+	</book>
+
+	<book genre="Fantasy">
+		<title>Володар Перснів</title>
+		<author faculty="Philology">Дж. Р. Р. Толкін</author>
+		<year>1954</year>
+	</book>
+	<book genre="Fantasy">
+		<title>Гра престолів</title>
+		<author faculty="Literature">Джордж Р. Р. Мартін</author>
+		<year>1996</year>
+	</book>
+	<book genre="Fantasy">
+		<title>Ім'я вітру</title>
+		<author faculty="Literature">Патрік Ротфусс</author>
+		<year>2007</year>
+	</book>
+	<book genre="Fantasy">
+		<title>Гаррі Поттер і філософський камінь</title>
+		<author faculty="Literature">Дж. К. Роулінг</author>
+		<year>1997</year>
+	</book>
+	<book genre="Fantasy">
+		<title>Гобіт, або Туди і звідти</title>
+		<author faculty="Philology">Дж. Р. Р. Толкін</author>
+		<year>1937</year>
+	</book>
+
+	<book genre="Classic">
+		<title>Гордість і упередження</title>
+		<author faculty="Literature">Джейн Остін</author>
+		<year>1813</year>
+	</book>
+	<book genre="Classic">
+		<title>Мобі Дік, або Білий кит</title>
+		<author faculty="Literature">Герман Мелвілл</author>
+		<year>1851</year>
+	</book>
+	<book genre="Classic">
+		<title>Злочин і кара</title>
+		<author faculty="Literature">Федір Достоєвський</author>
+		<year>1866</year>
+	</book>
+	<book genre="Classic">
+		<title>Франкенштейн, або Сучасний Прометей</title>
+		<author faculty="Literature">Мері Шеллі</author>
+		<year>1818</year>
+	</book>
+	<book genre="Classic">
+		<title>Великі сподівання</title>
+		<author faculty="Literature">Чарлз Дікенс</author>
+		<year>1861</year>
+	</book>
+
+	<book genre="History">
+		<title>Злет і падіння Третього Рейху</title>
+		<author faculty="Journalism">Вільям Ширер</author>
+		<year>1960</year>
+	</book>
+	<book genre="History">
+		<title>Людина розумна. Історія людства від минулого до майбутнього</title>
+		<author faculty="History">Ювал Ной Харарі</author>
+		<year>2011</year>
+	</book>
+	<book genre="History">
+		<title>Зброя, мікроби і харч</title>
+		<author faculty="Geography">Джаред Даймонд</author>
+		<year>1997</year>
+	</book>
+</library>
