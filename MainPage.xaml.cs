@@ -108,11 +108,22 @@ namespace Lab2OOP
             {
                 using (Stream xmlStream = await _xmlFileResult.OpenReadAsync())
                 {
-                    var results = _strategy.Search(criteria, xmlStream);
-                    EditorResults.Text = $"Знайдено ({results.Count}) за методом {selectedStrategy}:\n\n";
-                    var numberedResults = results.Select((bookTitle, index) => $"{index + 1}. {bookTitle}");
+                    // Отримуємо список об'єктів BookResult
+                    List<BookResult> results = _strategy.Search(criteria, xmlStream);
 
-                    EditorResults.Text += string.Join("\n", numberedResults);
+                    for (int i = 0; i < results.Count; i++)
+                    {
+                        results[i].Number = i + 1;
+                    }
+
+                    // Передаємо цей список у нашу таблицю (CollectionView)
+                    CollectionResults.ItemsSource = results;
+
+                    // Можна вивести кількість знайдених в заголовок або спливаюче вікно
+                    if (results.Count == 0)
+                    {
+                        await DisplayAlert("Результат", "Нічого не знайдено за вашими критеріями.", "OK");
+                    }
                 }
             }
             catch (Exception ex)
@@ -168,7 +179,7 @@ namespace Lab2OOP
         private void OnClearClicked(object sender, EventArgs e)
         {
             PickerStrategy.SelectedIndex = 0;
-            EditorResults.Text = string.Empty;
+            CollectionResults.ItemsSource = null;
 
             PickerAuthor.SelectedIndex = 0;
             PickerFaculty.SelectedIndex = 0;

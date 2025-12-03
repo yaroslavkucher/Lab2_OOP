@@ -1,80 +1,95 @@
 ﻿using System.Xml;
 
 namespace Lab2OOP;
+
 public class SaxStrategy : IAnalysisStrategy
 {
-    public List<string> Search(SearchCriteria criteria, Stream xmlStream)
+    public List<BookResult> Search(SearchCriteria criteria, Stream xmlStream)
     {
-        var results = new List<string>();
+        var results = new List<BookResult>();
         using (XmlReader reader = XmlReader.Create(xmlStream))
         {
-            string currentTitle = null;
-            bool inBook = false;
+            BookResult currentBook = null;
+            string currentElement = "";
 
-            bool matchesGenre = true;
-            bool foundMatchingAuthor = false;
-            bool foundMatchingFaculty = false;
+            bool matchGenre = true;
+            bool matchAuthor = true;
+            bool matchFaculty = true;
 
-            bool authorSearchRequired = !string.IsNullOrWhiteSpace(criteria.Author);
-            bool facultySearchRequired = !string.IsNullOrWhiteSpace(criteria.Faculty);
-            bool genreSearchRequired = !string.IsNullOrWhiteSpace(criteria.Genre);
+            bool hasAuthorFilter = !string.IsNullOrWhiteSpace(criteria.Author);
+            bool hasFacultyFilter = !string.IsNullOrWhiteSpace(criteria.Faculty);
+
+            string tempAuthorName = null;
+            string tempAuthorFaculty = null;
 
             while (reader.Read())
             {
                 if (reader.NodeType == XmlNodeType.Element)
                 {
-                    if (reader.Name == "book")
-                    {
-                        inBook = true;
-                        currentTitle = null;
+                    currentElement = reader.Name;
 
-                        if (genreSearchRequired)
+                    if (currentElement == "book")
+                    {
+                        currentBook = new BookResult();
+
+                        string genre = reader.GetAttribute("genre");
+                        currentBook.Genre = genre;
+                        if (!string.IsNullOrWhiteSpace(criteria.Genre))
                         {
-                            string genre = reader.GetAttribute("genre");
-                            matchesGenre = (genre != null && genre.Equals(criteria.Genre, StringComparison.OrdinalIgnoreCase));
+                            matchGenre = string.Equals(genre, criteria.Genre, StringComparison.OrdinalIgnoreCase);
                         }
                         else
                         {
-                            matchesGenre = true;
+                            matchGenre = true;
                         }
 
-                        foundMatchingAuthor = !authorSearchRequired;
-                        foundMatchingFaculty = !facultySearchRequired;
+                        matchAuthor = !hasAuthorFilter;
+                        matchFaculty = !hasFacultyFilter;
                     }
-                    else if (inBook && reader.Name == "title")
+                    else if (currentElement == "author")
                     {
-                        reader.Read();
-                        if (reader.NodeType == XmlNodeType.Text)
-                            currentTitle = reader.Value;
-                    }
-                    else if (inBook && matchesGenre && reader.Name == "author")
-                    {
-                        if (facultySearchRequired && !foundMatchingFaculty)
-                        {
-                            string faculty = reader.GetAttribute("faculty");
-                            if (faculty != null && faculty.Equals(criteria.Faculty, StringComparison.OrdinalIgnoreCase))
-                            {
-                                foundMatchingFaculty = true;
-                            }
-                        }
+                        tempAuthorFaculty = reader.GetAttribute("faculty") ?? "";
 
-                        if (authorSearchRequired && !foundMatchingAuthor)
+                        if (hasFacultyFilter && !matchFaculty)
                         {
-                            reader.Read();
-                            if (reader.NodeType == XmlNodeType.Text && reader.Value != null && reader.Value.Contains(criteria.Author, StringComparison.OrdinalIgnoreCase))
+                            if (string.Equals(tempAuthorFaculty, criteria.Faculty, StringComparison.OrdinalIgnoreCase))
+                                matchFaculty = true;
+                        }
+                    }
+                }
+                else if (reader.NodeType == XmlNodeType.Text)
+                {
+                    if (currentBook != null)
+                    {
+                        if (currentElement == "title")
+                            currentBook.Title = reader.Value;
+                        else if (currentElement == "year")
+                            currentBook.Year = reader.Value;
+                        else if (currentElement == "author")
+                        {
+                            tempAuthorName = reader.Value;
+
+                            currentBook.AuthorsInfo.Add($"{tempAuthorName} ({tempAuthorFaculty})");
+
+                            if (hasAuthorFilter && !matchAuthor)
                             {
-                                foundMatchingAuthor = true;
+                                if (tempAuthorName.Contains(criteria.Author, StringComparison.OrdinalIgnoreCase))
+                                    matchAuthor = true;
                             }
                         }
                     }
                 }
-                else if (reader.NodeType == XmlNodeType.EndElement && reader.Name == "book")
+                else if (reader.NodeType == XmlNodeType.EndElement)
                 {
-                    if (matchesGenre && foundMatchingAuthor && foundMatchingFaculty && currentTitle != null)
+                    if (reader.Name == "book")
                     {
-                        results.Add(currentTitle);
+                        if (matchGenre && matchAuthor && matchFaculty && currentBook != null)
+                        {
+                            results.Add(currentBook);
+                        }
+                        currentBook = null;
                     }
-                    inBook = false;
+                    currentElement = "";
                 }
             }
         }

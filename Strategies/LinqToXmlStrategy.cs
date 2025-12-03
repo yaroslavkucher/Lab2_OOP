@@ -4,7 +4,7 @@ namespace Lab2OOP;
 
 public class LinqToXmlStrategy : IAnalysisStrategy
 {
-    public List<string> Search(SearchCriteria criteria, Stream xmlStream)
+    public List<BookResult> Search(SearchCriteria criteria, Stream xmlStream)
     {
         XDocument doc = XDocument.Load(xmlStream);
 
@@ -15,7 +15,15 @@ public class LinqToXmlStrategy : IAnalysisStrategy
                            book.Elements("author").Any(a => a.Value.Contains(criteria.Author, StringComparison.OrdinalIgnoreCase)))
                     where (string.IsNullOrWhiteSpace(criteria.Faculty) ||
                            book.Elements("author").Any(a => (string)a.Attribute("faculty") == criteria.Faculty))
-                    select book.Element("title").Value;
+                    select new BookResult
+                    {
+                        Title = (string)book.Element("title"),
+                        Genre = (string)book.Attribute("genre"),
+                        Year = (string)book.Element("year"),
+                        AuthorsInfo = book.Elements("author")
+                                          .Select(a => $"{a.Value} (Faculty: {(string)a.Attribute("faculty")})")
+                                          .ToList()
+                    };
 
         return query.ToList();
     }

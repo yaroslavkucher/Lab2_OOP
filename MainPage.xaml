@@ -151,20 +151,45 @@
            TextColor="#E1E1E1"/>
 
             <Border Grid.Row="1" 
-            StrokeThickness="0" 
-            StrokeShape="RoundRectangle 12"
-            BackgroundColor="#252526">
-                <Editor x:Name="EditorResults"
-                IsReadOnly="True"
-                Placeholder="Виконайте пошук..."
-                PlaceholderColor="#606060"
-                TextColor="#D4D4D4" 
-                BackgroundColor="Transparent"
-                FontFamily="Consolas" 
-                FontSize="14"
-                AutoSize="Disabled"
-                VerticalOptions="Fill"
-                Margin="5"/>
+                    StrokeThickness="0" 
+                    StrokeShape="RoundRectangle 12"
+                    BackgroundColor="#252526"
+                    Padding="10">
+
+                <Grid RowDefinitions="Auto, *">
+                    <Grid Grid.Row="0" ColumnDefinitions="40, 2*, 1*, 60, 2*" Padding="5,10" BackgroundColor="#333333">
+                        <Label Grid.Column="0" Text="№" FontAttributes="Bold" TextColor="#E1E1E1" HorizontalTextAlignment="Center"/>
+                        <Label Grid.Column="1" Text="Назва" FontAttributes="Bold" TextColor="#E1E1E1" Margin="5,0"/>
+                        <Label Grid.Column="2" Text="Жанр" FontAttributes="Bold" TextColor="#E1E1E1" Margin="5,0"/>
+                        <Label Grid.Column="3" Text="Рік" FontAttributes="Bold" TextColor="#E1E1E1" HorizontalTextAlignment="Center"/>
+                        <Label Grid.Column="4" Text="Автори" FontAttributes="Bold" TextColor="#E1E1E1" Margin="5,0"/>
+                    </Grid>
+
+                    <CollectionView Grid.Row="1" x:Name="CollectionResults">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid ColumnDefinitions="40, 2*, 1*, 60, 2*" Padding="5,10">
+
+                                    <Label Grid.Column="0" Text="{Binding Number}" TextColor="#ACACAC" HorizontalTextAlignment="Center" VerticalOptions="Start"/>
+
+                                    <Label Grid.Column="1" Text="{Binding Title}" TextColor="#D4D4D4" FontAttributes="Bold" LineBreakMode="WordWrap" Margin="5,0"/>
+
+                                    <Label Grid.Column="2" Text="{Binding Genre}" TextColor="#ACACAC" LineBreakMode="TailTruncation" Margin="5,0"/>
+
+                                    <Label Grid.Column="3" Text="{Binding Year}" TextColor="#D4D4D4" HorizontalTextAlignment="Center"/>
+
+                                    <Label Grid.Column="4" Text="{Binding AuthorsDisplay}" TextColor="#D4D4D4" LineBreakMode="WordWrap" Margin="5,0" FontSize="12"/>
+
+                                    <BoxView Grid.ColumnSpan="5" HeightRequest="1" Color="#404040" VerticalOptions="End" Margin="0,5,0,0"/>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+
+                        <CollectionView.EmptyView>
+                            <Label Text="Немає даних для відображення" TextColor="Gray" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,50,0,0"/>
+                        </CollectionView.EmptyView>
+                    </CollectionView>
+                </Grid>
             </Border>
         </Grid>
 

@@ -4,15 +4,15 @@ namespace Lab2OOP;
 
 public class DomStrategy : IAnalysisStrategy
 {
-    public List<string> Search(SearchCriteria criteria, Stream xmlStream)
+    public List<BookResult> Search(SearchCriteria criteria, Stream xmlStream)
     {
-        var results = new List<string>();
+        var results = new List<BookResult>();
         XmlDocument doc = new XmlDocument();
         doc.Load(xmlStream);
 
         string xpath = "//book";
-
         var conditions = new List<string>();
+
         if (!string.IsNullOrWhiteSpace(criteria.Genre))
         {
             conditions.Add($"@genre='{criteria.Genre}'");
@@ -35,7 +35,18 @@ public class DomStrategy : IAnalysisStrategy
 
         foreach (XmlNode node in nodes)
         {
-            results.Add(node.SelectSingleNode("title").InnerText);
+            var book = new BookResult();
+            book.Title = node.SelectSingleNode("title").InnerText ?? "Без назви";
+            book.Genre = node.Attributes["genre"]?.Value ?? "Невідомо";
+            book.Year = node.SelectSingleNode("year")?.InnerText ?? "Невідомо";
+
+            foreach (XmlNode authorNode in node.SelectNodes("author"))
+            {
+                string name = authorNode.InnerText;
+                string faculty = authorNode.Attributes["faculty"]?.Value ?? "Невідомо";
+                book.AuthorsInfo.Add($"{name} ({faculty})");
+            }
+            results.Add(book);
         }
         return results;
     }
