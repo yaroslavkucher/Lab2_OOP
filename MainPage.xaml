@@ -169,29 +169,31 @@
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
                                 <Grid ColumnDefinitions="40, 2*, 1*, 60, 2*" Padding="5,10">
-
-                                    <Label Grid.Column="0" Text="{Binding Number}" TextColor="#ACACAC" HorizontalTextAlignment="Center" VerticalOptions="Start"/>
-
+                                    <Label Grid.Column="0" Text="{Binding Number}" TextColor="#ACACAC" HorizontalTextAlignment="Center"/>
                                     <Label Grid.Column="1" Text="{Binding Title}" TextColor="#D4D4D4" FontAttributes="Bold" LineBreakMode="WordWrap" Margin="5,0"/>
-
                                     <Label Grid.Column="2" Text="{Binding Genre}" TextColor="#ACACAC" LineBreakMode="TailTruncation" Margin="5,0"/>
-
                                     <Label Grid.Column="3" Text="{Binding Year}" TextColor="#D4D4D4" HorizontalTextAlignment="Center"/>
-
                                     <Label Grid.Column="4" Text="{Binding AuthorsDisplay}" TextColor="#D4D4D4" LineBreakMode="WordWrap" Margin="5,0" FontSize="12"/>
-
                                     <BoxView Grid.ColumnSpan="5" HeightRequest="1" Color="#404040" VerticalOptions="End" Margin="0,5,0,0"/>
                                 </Grid>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
 
                         <CollectionView.EmptyView>
-                            <Label Text="Немає даних для відображення" TextColor="Gray" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,50,0,0"/>
+                            <Grid>
+                                <Label x:Name="StatusLabel"
+                                       Text="Виконайте пошук..." 
+                                       TextColor="Gray"
+                                       FontSize="18"
+                                       HorizontalOptions="Center" 
+                                       VerticalOptions="Center"/>
+                            </Grid>
                         </CollectionView.EmptyView>
+
                     </CollectionView>
                 </Grid>
             </Border>
         </Grid>
-
+        
     </Grid>
 </ContentPage>
