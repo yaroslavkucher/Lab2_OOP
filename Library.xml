@@ -21,6 +21,23 @@
 		<author faculty="Philosophy">Марк Аврелій</author>
 		<year>180</year>
 	</book>
+	<book genre="Thriller">
+		<title>Чужинець</title>
+		<author>Стівен Кінг</author>
+		<year>2018</year>
+	</book>
+	<book genre="Thriller">
+		<title>Чужинець</title>
+		<author>Макс Кідрук</author>
+		<year>2016</year>
+	</book>
+
+	<book genre="ScienceFiction">
+		<title>Пробудження Левіафана</title>
+		<author faculty="Literature">Деніел Абрагам</author>
+		<author faculty="History">Тай Френк</author>
+		<year>2011</year>
+	</book>
 
 	<book genre="Programming" pages="916">
 		<title>Code Complete</title>

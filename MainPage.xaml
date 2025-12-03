@@ -157,39 +157,80 @@
                     Padding="10">
 
                 <Grid RowDefinitions="Auto, *">
-                    <Grid Grid.Row="0" ColumnDefinitions="40, 2*, 1*, 60, 2*" Padding="5,10" BackgroundColor="#333333">
-                        <Label Grid.Column="0" Text="№" FontAttributes="Bold" TextColor="#E1E1E1" HorizontalTextAlignment="Center"/>
-                        <Label Grid.Column="1" Text="Назва" FontAttributes="Bold" TextColor="#E1E1E1" Margin="5,0"/>
-                        <Label Grid.Column="2" Text="Жанр" FontAttributes="Bold" TextColor="#E1E1E1" Margin="5,0"/>
-                        <Label Grid.Column="3" Text="Рік" FontAttributes="Bold" TextColor="#E1E1E1" HorizontalTextAlignment="Center"/>
-                        <Label Grid.Column="4" Text="Автори" FontAttributes="Bold" TextColor="#E1E1E1" Margin="5,0"/>
-                    </Grid>
-
-                    <CollectionView Grid.Row="1" x:Name="CollectionResults">
+                    <CollectionView Grid.Row="1" x:Name="CollectionResults" Margin="0,5">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <Grid ColumnDefinitions="40, 2*, 1*, 60, 2*" Padding="5,10">
-                                    <Label Grid.Column="0" Text="{Binding Number}" TextColor="#ACACAC" HorizontalTextAlignment="Center"/>
-                                    <Label Grid.Column="1" Text="{Binding Title}" TextColor="#D4D4D4" FontAttributes="Bold" LineBreakMode="WordWrap" Margin="5,0"/>
-                                    <Label Grid.Column="2" Text="{Binding Genre}" TextColor="#ACACAC" LineBreakMode="TailTruncation" Margin="5,0"/>
-                                    <Label Grid.Column="3" Text="{Binding Year}" TextColor="#D4D4D4" HorizontalTextAlignment="Center"/>
-                                    <Label Grid.Column="4" Text="{Binding AuthorsDisplay}" TextColor="#D4D4D4" LineBreakMode="WordWrap" Margin="5,0" FontSize="12"/>
-                                    <BoxView Grid.ColumnSpan="5" HeightRequest="1" Color="#404040" VerticalOptions="End" Margin="0,5,0,0"/>
-                                </Grid>
+                                <Border Margin="0,0,0,12" 
+                                Padding="15"
+                                BackgroundColor="#2D2D30"
+                                Stroke="#3E3E42"
+                                StrokeThickness="1"
+                                StrokeShape="RoundRectangle 10">
+
+                                    <Grid RowDefinitions="Auto, Auto, Auto" ColumnDefinitions="*, Auto">
+
+                                        <Label Grid.Row="0" Grid.Column="0" 
+                                       Text="{Binding Title}" 
+                                       TextColor="White" 
+                                       FontAttributes="Bold" 
+                                       FontSize="16"
+                                       LineBreakMode="WordWrap"
+                                       Margin="0,0,5,0"/>
+
+                                        <Label Grid.Row="0" Grid.Column="1" 
+                                       Text="{Binding Number, StringFormat='#{0}'}" 
+                                       TextColor="#606060" 
+                                       FontSize="14"
+                                       FontFamily="Consolas"/>
+
+                                        <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                                       Text="{Binding AuthorsDisplay}" 
+                                       TextColor="#A0A0A0" 
+                                       FontSize="13" 
+                                       Margin="0,4,0,10"/>
+
+                                        <HorizontalStackLayout Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Spacing="10">
+
+                                            <Border BackgroundColor="#252526" 
+                                            Stroke="{StaticResource Primary}" 
+                                            StrokeThickness="1"
+                                            StrokeShape="RoundRectangle 6" 
+                                            Padding="10,4" 
+                                            HorizontalOptions="Start">
+                                                <Label Text="{Binding Genre}" 
+                                               TextColor="{StaticResource Secondary}" 
+                                               FontSize="11" 
+                                               FontAttributes="Bold"/>
+                                            </Border>
+
+                                            <Border BackgroundColor="#333333" 
+                                            StrokeThickness="0" 
+                                            StrokeShape="RoundRectangle 6" 
+                                            Padding="10,4" 
+                                            HorizontalOptions="Start">
+                                                <Label Text="{Binding Year}" 
+                                               TextColor="#E1E1E1" 
+                                               FontSize="11"/>
+                                            </Border>
+
+                                        </HorizontalStackLayout>
+                                    </Grid>
+                                </Border>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
 
                         <CollectionView.EmptyView>
                             <Grid>
-                                <Label x:Name="StatusLabel"
-                                       Text="Виконайте пошук..." 
-                                       TextColor="Gray"
-                                       FontSize="18"
-                                       HorizontalOptions="Center" 
-                                       VerticalOptions="Center"/>
+                                <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="10">
+                                    <Label Text="🔍" FontSize="40" HorizontalOptions="Center"/>
+                                    <Label x:Name="StatusLabel"
+                                   Text="Виконайте пошук..." 
+                                   TextColor="#606060"
+                                   FontSize="16"
+                                   HorizontalOptions="Center"/>
+                                </VerticalStackLayout>
                             </Grid>
                         </CollectionView.EmptyView>
-
                     </CollectionView>
                 </Grid>
             </Border>
