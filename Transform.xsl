@@ -86,23 +86,61 @@
 							<td>
 								<xsl:value-of select="position()"/>
 							</td>
+
 							<td>
 								<i>
-									<xsl:value-of select="title"/>
+									<xsl:choose>
+										<xsl:when test="string(title)">
+											<xsl:value-of select="title"/>
+										</xsl:when>
+										<xsl:otherwise>Невідомо</xsl:otherwise>
+									</xsl:choose>
 								</i>
 							</td>
+
 							<td>
-								<xsl:value-of select="@genre"/>
+								<xsl:choose>
+									<xsl:when test="string(@genre)">
+										<xsl:value-of select="@genre"/>
+									</xsl:when>
+									<xsl:otherwise>Невідомо</xsl:otherwise>
+								</xsl:choose>
 							</td>
+
 							<td>
-								<xsl:value-of select="year"/>
+								<xsl:choose>
+									<xsl:when test="string(year)">
+										<xsl:value-of select="year"/>
+									</xsl:when>
+									<xsl:otherwise>Невідомо</xsl:otherwise>
+								</xsl:choose>
 							</td>
+
 							<td>
-								<xsl:for-each select="author">
-									<xsl:value-of select="."/>
-									(<xsl:value-of select="@faculty"/>)
-									<xsl:if test="position() != last()">, </xsl:if>
-								</xsl:for-each>
+								<xsl:choose>
+									<xsl:when test="count(author) > 0">
+										<xsl:for-each select="author">
+											<xsl:choose>
+												<xsl:when test="string(.)">
+													<xsl:value-of select="."/>
+												</xsl:when>
+												<xsl:otherwise>Невідомий автор</xsl:otherwise>
+											</xsl:choose>
+
+											<xsl:text> (</xsl:text>
+											<xsl:choose>
+												<xsl:when test="string(@faculty)">
+													<xsl:value-of select="@faculty"/>
+												</xsl:when>
+												<xsl:otherwise>Невідомо</xsl:otherwise>
+											</xsl:choose>
+											<xsl:text>)</xsl:text>
+
+											<xsl:if test="position() != last()">, </xsl:if>
+										</xsl:for-each>
+									</xsl:when>
+									<xsl:otherwise>Невідомо</xsl:otherwise>
+								</xsl:choose>
 							</td>
 						</tr>
 					</xsl:for-each>

@@ -115,10 +115,18 @@ namespace Lab2OOP
                         results[i].Number = i + 1;
                     }
 
-                    CollectionResults.ItemsSource = results;
-
-                    if (results.Count == 0)
+                    if (results.Count > 0)
                     {
+                        // 1. Є результати: показуємо список, ховаємо заглушку
+                        CollectionResults.ItemsSource = results;
+                        CollectionResults.IsVisible = true;
+                        EmptyStateLayout.IsVisible = false;
+                    }
+                    else
+                    {
+                        // 2. Пусто: ховаємо список, показуємо заглушку з текстом "Нічого не знайдено"
+                        CollectionResults.IsVisible = false;
+                        EmptyStateLayout.IsVisible = true;
                         StatusLabel.Text = "За вашим запитом нічого не знайдено";
                     }
                 }
@@ -176,13 +184,16 @@ namespace Lab2OOP
         private void OnClearClicked(object sender, EventArgs e)
         {
             PickerStrategy.SelectedIndex = 0;
+
+            if (PickerAuthor.ItemsSource != null && PickerAuthor.ItemsSource.Count > 0) PickerAuthor.SelectedIndex = 0;
+            if (PickerFaculty.ItemsSource != null && PickerFaculty.ItemsSource.Count > 0) PickerFaculty.SelectedIndex = 0;
+            if (PickerGenre.ItemsSource != null && PickerGenre.ItemsSource.Count > 0) PickerGenre.SelectedIndex = 0;
+
+            // Скидання інтерфейсу до початкового стану
             CollectionResults.ItemsSource = null;
-
+            CollectionResults.IsVisible = false;  // Ховаємо список
+            EmptyStateLayout.IsVisible = true;    // Показуємо заглушку
             StatusLabel.Text = "Виконайте пошук...";
-
-            PickerAuthor.SelectedIndex = 0;
-            PickerFaculty.SelectedIndex = 0;
-            PickerGenre.SelectedIndex = 0;
         }
 
         private void OnClearFileClicked(object sender, EventArgs e)
@@ -190,15 +201,12 @@ namespace Lab2OOP
             _xmlFileResult = null;
             LblXmlFile.Text = "XML: Не обрано";
 
+            PickerAuthor.ItemsSource = new List<string>();
+            PickerFaculty.ItemsSource = new List<string>();
+            PickerGenre.ItemsSource = new List<string>();
+
+            // Потім викликаємо очищення UI (воно безпечно пропустить зміну індексів завдяки перевіркам вище)
             OnClearClicked(sender, e);
-
-            PickerAuthor.ItemsSource = new List<string> {};
-            PickerFaculty.ItemsSource = new List<string> {};
-            PickerGenre.ItemsSource = new List<string> {};
-
-            PickerAuthor.SelectedIndex = 0;
-            PickerFaculty.SelectedIndex = 0;
-            PickerGenre.SelectedIndex = 0;
         }
 
         private void OnHelpClicked(object sender, EventArgs e)

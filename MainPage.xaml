@@ -154,84 +154,67 @@
                     StrokeThickness="0" 
                     StrokeShape="RoundRectangle 12"
                     BackgroundColor="#252526"
-                    Padding="10">
-
-                <Grid RowDefinitions="Auto, *">
-                    <CollectionView Grid.Row="1" x:Name="CollectionResults" Margin="0,5">
+                    Padding="5">
+                <Grid>
+                    <CollectionView x:Name="CollectionResults" 
+                                    IsVisible="False"
+                                    Margin="0,5">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <Border Margin="0,0,0,12" 
-                                Padding="15"
-                                BackgroundColor="#2D2D30"
-                                Stroke="#3E3E42"
-                                StrokeThickness="1"
-                                StrokeShape="RoundRectangle 10">
+                                <Border Margin="0,0,0,8" 
+                                        Padding="15"
+                                        BackgroundColor="#2D2D30"
+                                        Stroke="#3E3E42"
+                                        StrokeThickness="1"
+                                        StrokeShape="RoundRectangle 10">
 
                                     <Grid RowDefinitions="Auto, Auto, Auto" ColumnDefinitions="*, Auto">
-
                                         <Label Grid.Row="0" Grid.Column="0" 
-                                       Text="{Binding Title}" 
-                                       TextColor="White" 
-                                       FontAttributes="Bold" 
-                                       FontSize="16"
-                                       LineBreakMode="WordWrap"
-                                       Margin="0,0,5,0"/>
+                                               Text="{Binding Title}" 
+                                               TextColor="White" 
+                                               FontAttributes="Bold" 
+                                               FontSize="16"
+                                               LineBreakMode="WordWrap"
+                                               Margin="0,0,5,0"/>
 
                                         <Label Grid.Row="0" Grid.Column="1" 
-                                       Text="{Binding Number, StringFormat='#{0}'}" 
-                                       TextColor="#606060" 
-                                       FontSize="14"
-                                       FontFamily="Consolas"/>
+                                               Text="{Binding Number, StringFormat='#{0}'}" 
+                                               TextColor="#606060" 
+                                               FontSize="14"
+                                               FontFamily="Consolas"/>
 
                                         <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                                       Text="{Binding AuthorsDisplay}" 
-                                       TextColor="#A0A0A0" 
-                                       FontSize="13" 
-                                       Margin="0,4,0,10"/>
+                                               Text="{Binding AuthorsDisplay}" 
+                                               TextColor="#A0A0A0" 
+                                               FontSize="13" 
+                                               Margin="0,4,0,10"/>
 
                                         <HorizontalStackLayout Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Spacing="10">
-
-                                            <Border BackgroundColor="#252526" 
-                                            Stroke="{StaticResource Primary}" 
-                                            StrokeThickness="1"
-                                            StrokeShape="RoundRectangle 6" 
-                                            Padding="10,4" 
-                                            HorizontalOptions="Start">
-                                                <Label Text="{Binding Genre}" 
-                                               TextColor="{StaticResource Secondary}" 
-                                               FontSize="11" 
-                                               FontAttributes="Bold"/>
+                                            <Border BackgroundColor="#252526" Stroke="{StaticResource Primary}" StrokeThickness="1" StrokeShape="RoundRectangle 6" Padding="10,4" HorizontalOptions="Start">
+                                                <Label Text="{Binding Genre}" TextColor="{StaticResource Secondary}" FontSize="11" FontAttributes="Bold"/>
                                             </Border>
-
-                                            <Border BackgroundColor="#333333" 
-                                            StrokeThickness="0" 
-                                            StrokeShape="RoundRectangle 6" 
-                                            Padding="10,4" 
-                                            HorizontalOptions="Start">
-                                                <Label Text="{Binding Year}" 
-                                               TextColor="#E1E1E1" 
-                                               FontSize="11"/>
+                                            <Border BackgroundColor="#333333" StrokeThickness="0" StrokeShape="RoundRectangle 6" Padding="10,4" HorizontalOptions="Start">
+                                                <Label Text="{Binding Year}" TextColor="#E1E1E1" FontSize="11"/>
                                             </Border>
-
                                         </HorizontalStackLayout>
                                     </Grid>
                                 </Border>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
-
-                        <CollectionView.EmptyView>
-                            <Grid>
-                                <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="10">
-                                    <Label Text="🔍" FontSize="40" HorizontalOptions="Center"/>
-                                    <Label x:Name="StatusLabel"
-                                   Text="Виконайте пошук..." 
-                                   TextColor="#606060"
-                                   FontSize="16"
-                                   HorizontalOptions="Center"/>
-                                </VerticalStackLayout>
-                            </Grid>
-                        </CollectionView.EmptyView>
                     </CollectionView>
+
+                    <VerticalStackLayout x:Name="EmptyStateLayout"
+                                         VerticalOptions="Center"
+                                         HorizontalOptions="Center"
+                                         Spacing="15"
+                                         IsVisible="True">
+                        <Label Text="🔍" FontSize="60" HorizontalOptions="Center" TextColor="#404040"/>
+                        <Label x:Name="StatusLabel"
+                               Text="Виконайте пошук..." 
+                               TextColor="#808080"
+                               FontSize="18"
+                               HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
                 </Grid>
             </Border>
         </Grid>
